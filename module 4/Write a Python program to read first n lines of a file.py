@@ -1,0 +1,11 @@
+file=open("ap","w")
+file.write("yoo hi there")
+file.close()
+file=open("ap","r+")
+file.write("llkkl\nlllkkkjjkffsd\nsdjhfbsjhfbj\nshgdvfhsgvf")
+file.seek(0)
+s=str(file.read())
+file.close()
+l=list(s.split("\n"))
+for i in range(3):
+    print(l[i])
