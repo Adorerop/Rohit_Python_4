@@ -1,0 +1,2 @@
+This is w+ mode using python file management.
+r+ operation.
