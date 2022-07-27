@@ -54,4 +54,3 @@ while True:
         b1.checkBalance()
     else:
         break
-    
