@@ -36,7 +36,8 @@ def signup(request):
 						email=request.POST['email'],
 						mobile=request.POST['mobile'],
 						address=request.POST['address'],
-						password=request.POST['password']
+						password=request.POST['password'],
+						profile_pic=request.FILES['profile_pic']
 					)
 				msg="User sign up successfully"
 				return render(request,'login.html',{'msg':msg})
@@ -54,6 +55,7 @@ def login(request):
 				)
 			request.session['email']=user.email
 			request.session['fname']=user.fname
+			request.session['profile_pic']=user.profile_pic.url
 			return render(request,'index.html')
 		except:
 			msg="Email or password invalid"
@@ -130,3 +132,22 @@ def new_password(request):
 	else:
 		msg="nope"
 		return render(request,'new_password.html',{'email':email})
+
+def profile(request):
+	user=User.objects.get(email=request.session['email'])
+	if request.method=="POST":
+		user.fname=request.POST['fname']
+		user.lname=request.POST['lname']
+		user.mobile=request.POST['mobile']
+		user.address=request.POST['address']
+		try:
+			user.profile_pic=request.FILES['profile_pic']
+		except:
+			pass
+		user.save()
+		msg="profile updated successfully"
+		request.session['profile_pic']=user.profile_pic.url
+		return render(request,'profile.html',{'user':user,'msg':msg})
+
+	else:
+		return render(request,'profile.html',{'user':user})

@@ -11,7 +11,7 @@
 	{% if msg %}
 		<b style="color:blue;">{{msg}}</b>
 	{% endif %}
-	<form name="contact" method="post" action="{% url 'signup' %}">
+	<form name="signup" method="post" action="{% url 'signup' %}" enctype="multipart/form-data">
 		{% csrf_token %}
 		<table>
 			<tr>
@@ -41,6 +41,10 @@
 			<tr>
 				<td>Conform password</td>
 				<td><input type="password" name="cpassword"></td>
+			</tr>
+			<tr>
+				<td>Profile Picture</td>
+				<td><input type="file" name="profile_pic"></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
